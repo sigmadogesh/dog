@@ -1,0 +1,9 @@
+import matplotlib.image as mpimg
+import matplotlib.pyplot as plt
+
+img_path = '/content/goku.png'
+img = mpimg.imread(img_path)
+
+plt.imshow(img)
+plt.axis('off')
+plt.show()

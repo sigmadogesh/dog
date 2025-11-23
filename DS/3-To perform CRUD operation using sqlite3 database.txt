@@ -1,0 +1,52 @@
+import sqlite3
+print("-------------------------------")
+db = sqlite3.connect('test.db')
+qry = "insert into student (name,age,marks)values(?,?,?);"
+students = [('Amar',18,70),('Deepak',25,87)]
+try:
+    cur = db.cursor()
+    cur.execute('''CREATE TABLE student(
+    StudentID INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT (20) NOT NULL,
+    age INTEGER,
+    marks REAL);''')
+    print('Table created successfully')
+    db.commit()
+except:
+    print("Error in excution as DB already exists")
+    db.rollback()
+print("---------------------------------------")
+try:
+    cur = db.cursor()
+    cur.executemany(qry,students)
+    db.commit()
+    print("Insertion Sucessful")
+except:
+    print("Something went wrong")
+    db.rollback()
+print("------single Fetch------")
+sql="SELECT * from student where StudentID=?;"
+cur = db.cursor()
+cur.execute(sql,('5'))
+students= cur.fetchall()
+print(students)
+while True:
+    record = cur.fetchone()
+    if record==None:
+        break
+print("-----------------------------------")
+students = cur.fetchall()
+for rec in students:
+    print(rec)
+print('-----------------------------')
+qry_ = "update student set age = ? where name=?;"
+try:
+    cur=db.cursor()
+    cur.execute(qry_,(1,'Deepak'))
+    db.commit()
+    print("updation sucessful")
+except:
+    print("Failed")
+    db.rollback()
+db.close()
+print("CRUD operation performed by Priya")

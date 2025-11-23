@@ -1,0 +1,24 @@
+!pip install schedule
+import schedule
+import time
+
+def sudo_placement():
+ print("Get ready for sudo placement")
+def good_luck():
+ print("Good luck for test")
+def work():
+ print("Study and work hard")
+def bedtime():
+ print("It is bed time go rest")
+def sies():
+ print("All says SIES")
+
+schedule.every(1).minutes.do(sies)
+schedule.every().hour.do(sies)
+schedule.every().day.at("00:00").do(bedtime)
+schedule.every(1).to(2).minutes.do(work)
+schedule.every().monday.do(good_luck)
+schedule.every().tuesday.at("10:27").do(sudo_placement)
+while True:
+ schedule.run_pending()
+ time.sleep(1)

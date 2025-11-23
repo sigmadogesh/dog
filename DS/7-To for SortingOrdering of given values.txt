@@ -1,0 +1,10 @@
+data = data.frame(rollno = c(1, 5, 4, 2, 3), subjects = c("java", "python", "php", "sql",
+"c"))
+print(data) > print("sort the data in increasing order based on subjects ")
+print(data[order(data$subjects, decreasing = FALSE), ] )
+print("sort the data in decreasing order based on subjects ")
+print(data[order(data$subjects, decreasing = TRUE), ] )
+print("sort the data in increasing order based on rollno ")
+print(data[order(data$rollno, decreasing = FALSE), ] )
+print("sort the data in decreasing order based on rollno ")
+print(data[order(data$rollno, decreasing = TRUE), ] )

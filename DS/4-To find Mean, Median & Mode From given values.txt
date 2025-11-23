@@ -1,0 +1,59 @@
+import pandas as pd
+df = pd.DataFrame({"A":[12,4,5,44,1],"B":[5, 2, 54, 3, 2],"C":[20, 16, 7, 3,
+8],"D":[14, 3, 17, 2, 6]})
+print("DataFrame1:")
+print(df)
+print('--------------------------------------')
+
+print("Dataframe1 Median Ans:")
+print(df.median(axis=0))
+print('--------------------------------------')
+
+df = pd.DataFrame({"A":[12, 4, 5, None, 1],"B":[7, 2, 54, 3, None], "C":[20, 16, 11, 3, 8], "D":[14, 3, None, 2, 6]})
+print('DataFrame2:')
+print(df)
+ans = df.median(axis = 1,skipna = True)
+print('--------------------------------------')
+
+print("DataFrame2 Median Ans:")
+print(ans)
+print("------------------------------------")
+print("Performed by rollno 1")
+print("-------------------------------------")
+
+df= pd.DataFrame({"A":[12, 4, 5, 44, 1],"B":[5, 2, 54, 3, 2],"C":[20, 16, 7, 3, 8],"D":[14, 3, 17, 2, 6]})
+print("DataFrame1:")
+print(df)
+print("---------------------------------")
+
+print("DataFrame1 Mean Ans:")
+print(df.mean(axis=0))
+
+df= pd.DataFrame({"A":[12, 4, 5, None, 1],"B":[7, 2, 54, 3, None], "C":[20,16, 11, 3, 8], "D":[14, 3, None, 2, 6]})
+print("DataFrame2:")
+print(df)
+
+ans = df.mean(axis = 1,skipna = True)
+print("DataFrame2 Mean Ans:")
+print(ans)
+print("------------------------------------")
+print("Performed by rollno 1")
+print("-------------------------------------")
+
+df = pd.DataFrame({"A":[12, 4, 5, 44, 1],"B":[5, 2, 54, 3, 2],"C":[20, 16, 7, 3,
+8],"D":[14, 3, 17, 2, 6]})
+print("DataFrame1:")
+print(df)
+print('--------------------------------------')
+
+print("Dataframe1 Mode Ans:")
+print(df.mode(axis=0))
+print('--------------------------------------')
+df = pd.DataFrame({"A":[12, 4, 5, None, 1],"B":[7, 2, 54, 3, None], "C":[20,16, 11, 3, 8], "D":[14, 3, None, 2, 6]})
+print("DataFrame2:")
+print(df)
+print('--------------------------------------')
+
+ans = df.mode(axis = 1)
+print("DataFrame2 Mode Ans:")
+print(ans)

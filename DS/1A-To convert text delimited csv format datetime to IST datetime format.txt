@@ -1,0 +1,17 @@
+import datetime
+tm = datetime.time(1,50,20,133257)
+
+print('Time tm is',
+tm.hour, 'hours',
+tm.minute, 'minutes',
+tm.second, 'second and',
+tm.microsecond, 'microseconds')
+
+date = datetime.date(2018,5,12)
+print('The Date is', date.day,
+'/', date.month,
+'/', date.year,
+)
+
+x = datetime.datetime(2018,5,12,2,25,50,13)
+print(x.strftime("%H:%M:%S %b %d,%Y"))
