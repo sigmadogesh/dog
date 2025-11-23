@@ -1,0 +1,6 @@
+Install ESXi iso in VM Ware workstation
+
+Install VMware vSphere Client
+
+In vSphere, create new virtual machine, Install Windows XP iso file & open it
+

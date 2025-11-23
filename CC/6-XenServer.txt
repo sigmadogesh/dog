@@ -1,0 +1,27 @@
+Install XenServer in VMware Workstation & select Guest operating system as Linux
+
+Note IP Address - 192.168.124.137, ping it from cmd
+
+Now Install Citrix App if not installed
+
+Now Open Citrix XenCenter & Click Add Server
+
+Fill IP address copied from Installation & User name as "root" & password as "root123",which we had given during installation & click on Add then ok.
+
+Now Click on New Storage
+
+Select Window File Sharing(CIFS) & click next
+
+Uncheck Auto generate option & Click next
+
+Provide the path of shared windows XP image & enter local pc credential, click on FInish
+
+Click on New VM & Windows XP SP3
+
+Select ISO file & click next
+
+again next
+
+Uncheck - Start the new VM & click create now
+
+Now Right click on Windows XP & Start

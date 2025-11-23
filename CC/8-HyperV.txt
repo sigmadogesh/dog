@@ -1,0 +1,13 @@
+First uninstall VM Ware from control panel,
+
+Then Search on windows bar for Turn on Windows Features & click it
+
+Check on Hyper-V option
+
+After restart and then search on windows bar for Hyper-V manager & click on it
+
+Click on virtual switch manager option
+
+Select External as a connection type & then click on create virtual switch
+
+Install Windows XP.iso
