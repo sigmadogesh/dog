@@ -1,12 +1,10 @@
 import numpy as np
 
-#input and output data
 X=np.array(([2,9],[1,5],[3,6]),dtype=float)
 Y=np.array(([92],[86],[89]),dtype=float)
 
-#Normalize
-X=X/np.amax(X,axis=0) #scale inputs between 0-1
-Y=Y/100 #scale outputs between 0-1
+X=X/np.amax(X,axis=0)
+Y=Y/100
 
 class NN(object):
   def __init__(self):
@@ -16,13 +14,11 @@ class NN(object):
     self.outputsize=1
     self.learning_rate=0.1
 
-    #Initialize weights
     np.random.seed(42)
     self.W1=np.random.randn(self.inputsize,self.hiddensize)*0.1
     self.W2=np.random.randn(self.hiddensize,self.outputsize)*0.1
 
   def forward(self,X):
-    #Forward pass
     self.z=np.dot(X,self.W1)
     self.z2=self.sigmoidal(self.z)
     self.z3=np.dot(self.z2,self.W2)
@@ -32,18 +28,15 @@ class NN(object):
     return 1/(1+np.exp(-s))
 
   def sigmoidalprime(self,s):
-    #Derivative of sigmoid
     return s*(1-s)
 
   def backward(self,X,Y,o):
-    #Backpropogation
     self.o_error=Y-o
     self.o_delta=self.o_error*self.sigmoidalprime(o)
 
     self.z2_error=self.o_delta.dot(self.W2.T)
     self.z2_delta=self.z2_error*self.sigmoidalprime(self.z2)
 
-    #Update Weights
     self.W1 +=self.learning_rate*X.T.dot(self.z2_delta)
     self.W2 +=self.learning_rate*self.z2.T.dot(self.o_delta)
 
@@ -57,7 +50,6 @@ class NN(object):
         print(f"Epoch{i},Loss:{loss:.4f}")
     return o
 
-#create model
 obj=NN()
 output=obj.train(X,Y,epochs=1000)
 
@@ -65,3 +57,4 @@ print("\nFinal Results")
 print("Input:\n",X)
 print("Actual Output:\n",Y)
 print("Predicted Output:\n",np.round(output,3))
+
