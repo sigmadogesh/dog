@@ -1,31 +1,25 @@
 from os import popen
 import random
 
-#Fitness Function
 def fitness(x):
-  return x*x #maximize x^2
+  return x*x
 
-#Convert Binary String to Integer
 def decode(binary_string):
   return int(binary_string, 2)
 
-#Create Random Individual
 def random_individual(length):
   return ''.join(random.choice('01') for _ in range(length))
 
-#Selection (Tournament Selection)
 def selection(population):
   a=random.choice(population)
   b=random.choice(population)
   return a if fitness(decode(a)) > fitness(decode(b)) else b
 
-#Crossover
 def crossover(parent1, parent2):
   point=random.randint(1, len(parent1) - 1)
   child = parent1[:point] + parent2[point:]
   return child
 
-#Mutation
 def mutate(individual, mutation_rate=0.01):
   new=""
   for bit in individual:
@@ -35,13 +29,11 @@ def mutate(individual, mutation_rate=0.01):
       new+=bit
   return new
 
-#Main Genetic Algorithm
 def genetic_algorithm():
   population_size=10
-  chromosome_length=5     #because number range is 0-31
+  chromosome_length=5     
   generations=20
 
-#Create Initial Population
   population=[random_individual(chromosome_length) for _ in range(population_size)]
 
   for generation in range(generations):
@@ -58,9 +50,7 @@ def genetic_algorithm():
 
       population = new_population
 
-      #Find & Print best solution in this generation
       best = max(population, key=lambda ind: fitness(decode(ind)))
       print(f"Generation {generation + 1}: Best = {best}, x={decode(best)}, (Fitness = {fitness(decode(best))})")
 
-#Run GA
 genetic_algorithm()
