@@ -1,37 +1,30 @@
-#Import Libraries
 import numpy as np
 import pandas as pd
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
 
-#Load Iris dataset
 data=load_iris()
 X=data.data
 y=data.target
-y=pd.get_dummies(y).values #one-hot encoding
+y=pd.get_dummies(y).values
 
-#Split data into train and test sets
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.20, random_state=4)
 
-#Initialize hyperparameters
 learning_rate=0.2
 iterations=5000
-N=y_train.shape[0] #number of training samples
-input_size=4 #number of input features
-hidden_size=2 #number of hidden layer neurons
-output_size=3 #number of output classes
+N=y_train.shape[0]
+input_size=4
+hidden_size=2
+output_size=3
 
-#Store training metrics
 results=pd.DataFrame(columns=["mse","accuracy"])
 
-#Initialize weights
 np.random.seed(10)
-W1=np.random.normal(scale=0.5,size=(input_size,hidden_size)) #input-> hidden
-W2=np.random.normal(scale=0.5,size=(hidden_size,output_size)) #hidden-> output
+W1=np.random.normal(scale=0.5,size=(input_size,hidden_size))
+W2=np.random.normal(scale=0.5,size=(hidden_size,output_size))
 
-#Activation & utility functions
 def sigmoid(x):
   return 1/(1+np.exp(-x))
 
@@ -42,36 +35,30 @@ def accuracy(y_pred,y_true):
   acc=y_pred.argmax(axis=1)==y_true.argmax(axis=1)
   return acc.mean()
 
-#Training Loop
 for itr in range(iterations):
   #feedforward
-  Z1=np.dot(X_train,W1) #input-> hidden
+  Z1=np.dot(X_train,W1)
   A1=sigmoid(Z1)
 
-  Z2=np.dot(A1,W2) #hidden-> output
+  Z2=np.dot(A1,W2)
   A2=sigmoid(Z2)
 
-  #Calculate error & accuracy
   mse=mean_squared_error(A2,y_train)
   acc=accuracy(A2,y_train)
   results=pd.concat([results,pd.DataFrame({"mse":[mse],"accuracy":[acc]})],ignore_index=True)
 
-  #Backpropogation
   error_output= A2-y_train
   delta_output=error_output*A2*(1-A2)
 
   error_hidden=np.dot(delta_output,W2.T)
   delta_hidden=error_hidden*A1*(1-A1)
 
-  #Gradient calculation
   W2_update=np.dot(A1.T,delta_output)/N
   W1_update=np.dot(X_train.T,delta_hidden)/N
 
-  #Update weights
   W2 -=learning_rate*W2_update
   W1 -=learning_rate*W1_update
 
-#Plot Training curves
 plt.figure(figsize=(12,5))
 
 plt.subplot(1,2,1)
@@ -86,7 +73,6 @@ plt.ylabel("Accuracy")
 plt.tight_layout()
 plt.show()
 
-#Final Evaluation on test set
 Z1_test=np.dot(X_test,W1)
 A1_test=sigmoid(Z1_test)
 
@@ -96,3 +82,4 @@ A2_test=sigmoid(Z2_test)
 test_acc=accuracy(A2_test,y_test)
 print("\nFinal Training Accuracy:",round(results["accuracy"].iloc[-1],4))
 print("Final Test Accuracy:",round(test_acc,4))
+
