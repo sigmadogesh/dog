@@ -2,7 +2,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import time
 
-#--Hopfield Network with Graphical Visulaization---
 class HopfieldNetwork:
     def __init__(self, size):
         self.size = size
@@ -18,7 +17,6 @@ class HopfieldNetwork:
     def recall(self, pattern, steps=5, delay=0.5):
         pattern = np.array(pattern)
         for step in range(steps):
-            # Fix: Apply activation function (sign) after matrix multiplication
             pattern = np.sign(np.dot(self.weights, pattern))
             self.plot_pattern(pattern, step)
             time.sleep(delay)
@@ -26,15 +24,14 @@ class HopfieldNetwork:
 
     def plot_pattern(self, pattern, step):
         plt.clf()
-        plt.title(f"Hopfield Network - Step {step + 1}") # Fix typo: Hopfirld -> Hopfield
+        plt.title(f"Hopfield Network - Step {step + 1}")
         plt.axis("off")
         pattern_2d=np.array(pattern.reshape(2,2))
 
-        plt.imshow(pattern_2d, cmap="gray", vmin=-1, vmax=1) # Fix typo: plt,imshow -> plt.imshow
+        plt.imshow(pattern_2d, cmap="gray", vmin=-1, vmax=1)
         plt.draw()
         plt.pause(0.5)
 
-#---Example usage----
 patterns = [
     [1, -1, 1, -1],
     [-1, 1, -1, 1]
@@ -51,4 +48,5 @@ final_pattern = hopfield.recall(test_pattern, steps=6, delay=0.5)
 plt.ioff()
 
 print("Final recalled pattern:", final_pattern.tolist())
+
 plt.show()
