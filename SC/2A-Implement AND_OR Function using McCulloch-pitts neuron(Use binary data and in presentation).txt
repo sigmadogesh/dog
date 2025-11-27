@@ -1,12 +1,9 @@
-#Step 1:Number of inputs
 num_ip=int(input("Enter the number of inputs: "))
 
-#Step 2:Weights
 w1=1
 w2=2
 print(f"For the{num_ip}inputs,calculate the net input using Yin=x1*w1+x2*w2")
 
-#Step 3:Collect inputs
 x1=[]
 x2=[]
 for j in range(num_ip):
@@ -17,23 +14,20 @@ for j in range(num_ip):
 print("x1=",x1)
 print("x2=",x2)
 
-#Step 4: Weighted inputs(elementwise multiplication)
 n=[val * w1 for val in x1]
 m=[val*w2 for val in x2]
 
-#Step 5: Net input calculation(excitatory weights)
 Yin=[n[i]+m[i]for i in range(num_ip)]
 print("Yin(excitatory)=", Yin)
 
-#Step 6: Net input calculation(one excitatory, one inhibitory)
 Yin_inhib=[n[i]-m[i]for i in range(num_ip)]
 print("Yin(one inhibitory)=",Yin_inhib)
 
-#Step 7: Activation function(threshold at 1)
 Y=[]
 for i in range(num_ip):
   if Yin_inhib[i]>=1:
     Y.append(1)
   else:
     Y.append(0)
+
 print("Final Output Y=",Y)
