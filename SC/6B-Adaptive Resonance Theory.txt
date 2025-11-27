@@ -1,6 +1,5 @@
 import numpy as np
 
-#Step 1: Input data (binary patterns)
 data = np.array([
     [1, 0, 0, 1],
     [1, 0, 0, 1],
@@ -10,39 +9,30 @@ data = np.array([
     [1, 0, 1, 0]
 ])
 
-#Step 2: Parameters
-rho = 0.8        #Vigilance parameter (how strict the math is)
-alpha = 0.001    #Small constant to prevent division by zero
-categories = []  #To store learned category prototypes
+rho = 0.8
+alpha = 0.001
+categories = []
 
-#Step 3: ART1 algortim
 for x in data:
   if len(categories) == 0:
-    #No categories yet -- Create the first one
     categories.append(x.copy())
     continue
 
-  #Calculate similarities between input and each category
   best_match = None
   best_value = -1
 
   for i, w in enumerate(categories):
-    #Choice function Tj = |I ^ Wj| / (α + |Wj|)
     Tj = np.sum(np.logical_and(x, w)) / (alpha + np.sum(w))
     if Tj > best_value:
       best_value = Tj
       best_match = i
 
-  #Check Vigilance test
   match = np.sum(np.logical_and(x, categories[best_match])) / np.sum(x)
   if match >= rho:
-    #Update category (AND rule)
     categories[best_match] = np.logical_and(categories[best_match], x)
   else:
-    #Create a new category (OR rule)
     categories.append(x.copy())
 
-#Step 4: Display results
 print("Number of categories learned : ", len(categories))
 for i, cat in enumerate(categories):
   print(f"Category {i + 1} prototype:",cat)
