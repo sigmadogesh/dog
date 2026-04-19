@@ -1,6 +1,0 @@
-items = ["pen","pencil","book","eraser"]
-print("List of items:", items)
-
-print("is 'book' in the list?", "book" in items)
-
-print("Is 'marker' not in the list?", "marker" not in items)
