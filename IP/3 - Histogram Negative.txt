@@ -1,0 +1,45 @@
+import cv2
+import numpy as np
+import matplotlib.pyplot as plt
+
+img_bgr = cv2.imread('/content/vegeta.jpg')
+
+if img_bgr is None:
+    raise ValueError("Image not found. Check the path!")
+
+img_rgb = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
+img_neg = 255 - img_rgb
+
+plt.figure(figsize=(12, 8))
+
+
+plt.subplot(2, 2, 1)
+plt.title("Original Image")
+plt.imshow(img_rgb)
+plt.axis('off')
+
+
+plt.subplot(2, 2, 2)
+plt.title("Histogram (Original)")
+colors = ('r', 'g', 'b')
+for i, col in enumerate(colors):
+    hist = cv2.calcHist([img_rgb], [i], None, [256], [0, 256])
+    plt.plot(hist, color=col)
+plt.xlim([0, 256])
+
+
+plt.subplot(2, 2, 3)
+plt.title("Negative Image")
+plt.imshow(img_neg)
+plt.axis('off')
+
+
+plt.subplot(2, 2, 4)
+plt.title("Histogram (Negative)")
+for i, col in enumerate(colors):
+    hist = cv2.calcHist([img_neg], [i], None, [256], [0, 256])
+    plt.plot(hist, color=col)
+plt.xlim([0, 256])
+
+plt.tight_layout()
+plt.show()

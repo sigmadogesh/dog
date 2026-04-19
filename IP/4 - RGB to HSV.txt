@@ -1,0 +1,24 @@
+import cv2
+
+bgr_img = cv2.imread('/content/vegeta.jpg')
+
+if bgr_img is None:
+    raise ValueError("Image not found. Check path!")
+
+rgb_img = cv2.cvtColor(bgr_img, cv2.COLOR_BGR2RGB)
+
+
+hsv_img = cv2.cvtColor(bgr_img, cv2.COLOR_BGR2HSV)
+cv2.imwrite('hsv_image.jpg', hsv_img)
+
+
+plt.figure(figsize=(10, 5))
+
+plt.subplot(1, 2, 1)
+plt.title("Original Image")
+plt.imshow(rgb_img)
+plt.axis('off')
+
+plt.subplot(1, 2, 2)
+plt.title("HSV Image")
+plt.imshow(hsv_img)

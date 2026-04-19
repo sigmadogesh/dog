@@ -1,0 +1,41 @@
+import cv2
+import numpy as np
+import matplotlib.pyplot as plt
+
+img = cv2.imread('/content/vegeta.jpg', 0)
+
+if img is None:
+    raise ValueError("Image not found. Check path!")
+
+
+rgb_img = cv2.cvtColor(bgr_img, cv2.COLOR_BGR2RGB)
+
+imf = np.float32(img)
+
+dct = cv2.dct(imf)
+
+h, w = dct.shape
+mask = np.zeros((h, w), np.float32)
+mask[:50, :50] = 1
+
+dct_filtered = dct * mask
+
+img_back = cv2.idct(dct_filtered)
+
+img_back = np.clip(img_back, 0, 255)
+img_back = np.uint8(img_back)
+
+plt.figure(figsize=(10, 5))
+
+plt.subplot(1, 2, 1)
+plt.title("Original Image")
+plt.imshow(rgb_img)
+plt.axis('off')
+
+plt.subplot(1, 2, 2)
+plt.title("Reconstructed (Inverse DCT)")
+plt.imshow(img_back, cmap='gray')
+plt.axis('off')
+
+plt.tight_layout()
+plt.show()
