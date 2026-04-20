@@ -1,0 +1,20 @@
+R2:-
+
+conf t
+int f0/0
+ip address 192.168.1.2 255.255.255.0
+no shut
+exit
+int f1/0
+ip address 192.168.3.2 255.255.255.0
+no shut
+exit
+do sh ip route
+ip route 192.168.2.0 255.255.255.0 192.168.1.1
+ip route 192.168.2.0 255.255.255.0 192.168.3.1
+track 10 ip route 192.168.2.0 255.255.255.0 reachability
+exit
+exit
+sh track
+sh ip route
+
