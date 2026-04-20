@@ -1,0 +1,21 @@
+R2:-
+
+conf t
+int s1/0
+ip address 192.168.1.6 255.255.255.252
+no shut
+exit
+int s1/1
+ip address 172.24.1.17 255.255.255.252
+no shut
+exit
+int LO0
+ip address 202.0.0.1 255.255.255.0
+no shut
+exit
+router bgp 300
+no sync
+neighbor 192.168.1.5 remote-as 100
+neighbor 172.24.1.18 remote-as 65000
+network 202.0.0.0
+exit
