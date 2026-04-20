@@ -1,0 +1,22 @@
+R2:-
+
+conf t
+int LO0
+ip address 2.2.2.2 255.255.255.255
+ip ospf 1 area 0
+no shut
+exit
+int f0/0
+ip address 10.0.0.2 255.255.255.0
+ip ospf 1 area 0
+no shut
+exit
+int f1/0
+ip address 10.0.1.2 255.255.255.0
+ip ospf 1 area 0
+no shut
+exit
+router ospf 1
+mpls ldp autoconfig
+end
+sh mpls int

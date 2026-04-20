@@ -1,0 +1,47 @@
+R3:-
+
+conf t
+int LO3
+description R3 LAN
+ip address 192.168.3.1 255.255.255.0
+int s1/1
+description R3 --> R1
+ip address 172.16.13.3 255.255.255.248
+clockrate 64000
+bandwidth 64
+no shut
+exit
+int s1/2
+description R3 --> R2
+ip address 172.16.23.3 255.255.255.248
+bandwidth 128
+no shut
+exit
+int s1/3
+description R3 --> R4
+ip address 172.16.34.3 255.255.255.248
+clockrate 64000
+bandwidth 64
+no shut
+end
+sh ip int br | include up
+conf t
+router eigrp 1
+network 192.168.3.0
+network 172.16.13.0 0.0.0.7
+network 172.16.23.0 0.0.0.7
+network 172.16.34.0 0.0.0.7
+no auto-summary
+exit
+ip access-list standard PBR-ACL
+remark ACL matches R4 LAN B traffic
+permit 192.168.4.128 0.0.0.127
+exit
+route-map R3-to-R1 permit
+description RM to forward LAN B traffic to R1
+match ip address PBR-ACL
+set ip next-hop 172.16.13.1
+exit
+int s1/3
+ip policy route-map R3-toR1
+end

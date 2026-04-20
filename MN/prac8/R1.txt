@@ -1,0 +1,17 @@
+R1:-
+
+conf t
+int f0/0
+ip address 10.0.0.1 255.255.255.0
+ip ospf 1 area 0
+no shut
+exit
+int LO0
+ip address 1.1.1.1 255.255.255.255
+ip ospf 1 area 0
+no shut
+exit
+do sh ip ospf int br
+do sh ip int br | include up
+router ospf 1
+mpls ldp autoconfig

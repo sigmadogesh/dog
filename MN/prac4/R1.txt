@@ -1,0 +1,54 @@
+R1:-
+
+conf t
+int LO0
+description R1 LAN
+ip address 192.168.1.1 255.255.255.0
+exit
+int s1/0
+description R1 --> R2
+ip address 10.1.1.1 255.255.255.252
+clockrate 128000
+no shut
+exit
+ip route 0.0.0.0 0.0.0.0 10.1.1.2
+exit
+tclsh
+foreach address {
+192.168.1.1
+10.1.1.1
+10.1.1.2
+10.2.2.1
+10.2.2.2
+192.168.3.1
+} { ping $address }
+exit
+conf t
+security passwords min-length 10
+enable secret class12345
+line console 0
+password mscit25260
+exec-timeout 5 0
+login
+logging sync
+exit
+line vty 0 4
+password mscit25261
+exec-timeout 5 0
+login
+exit
+line aux 0
+no exec
+exit
+service password-encryption
+banner motd $Unauthorized access strictly prohibited!$
+username JR-ADMIN secret class12345
+username ADMIN secret class54321
+line console 0
+login local
+exit
+line vty 0 4
+login local
+exit
+exit
+telnet 10.2.2.2 

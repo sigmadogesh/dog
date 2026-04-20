@@ -1,0 +1,33 @@
+R3:-
+
+conf t
+hostname SanJose2
+no ip domain-lookup
+line con 0
+logging synchronous
+exec-timeout 0 0
+exit
+int LO0
+ip address 172.16.32.1 255.255.255.0
+exit
+int s1/2
+ip address 192.168.1.2 255.255.255.252
+clockrate 128000
+no shut
+exit
+int s1/1
+ip address 172.16.1.2 255.255.255.0
+no shut
+exit
+router eigrp 1
+network 172.16.0.0
+exit
+router bgp 64512
+neighbour 172.16.64.1 remote-as 64512
+neighbour 172.16.64.1 update-source LO0
+exit
+ip route 172.16.0.0 255.255.0.0 null0
+router bgp 64512
+neigh 192.168.1.1 remote-as 200
+network 172.16.0.0
+exit

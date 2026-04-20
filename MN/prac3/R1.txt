@@ -1,0 +1,30 @@
+R1:-
+
+conf t
+hostname ISP
+no ip domain-lookup
+line con 0
+logging synchronous
+exec-timeout 0 0
+exit
+int LO0
+ip address 192.168.100.1 255.255.255.0
+exit
+int s1/0
+ip address 192.168.1.5 255.255.255.252
+clockrate 128000
+no shut
+exit
+int s1/2
+ip address 192.168.1.1 255.255.255.252
+no shut
+end
+conf t
+router bgp 200
+neigh 192.168.1.6 remote-as 64512
+neigh 192.168.1.2 remote-as 64512
+network 192.168.100.0
+exit
+exit
+ping 172.16.1.1 source 192.168.100.1
+
