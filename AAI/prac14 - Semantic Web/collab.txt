@@ -1,0 +1,18 @@
+class SemanticWebGraph: 
+  def __init__ (self):  
+    self.triples = [] 
+ 
+  def add_triple(self, subject, predicate, object_entity):  
+    self.triples.append((subject, predicate, object_entity)) 
+ 
+  def query(self, subj_query): 
+    return [f"({s} --{p}--> {o})" for s, p, o in self.triples if s == 
+subj_query] 
+ 
+web_graph = SemanticWebGraph() 
+web_graph.add_triple("ArtificialIntelligence", "isSubfieldOf", "ComputerScience")  
+web_graph.add_triple("ArtificialIntelligence", "utilizes", "MachineLearning") 
+ 
+print("Semantic Web Relationships for 'ArtificialIntelligence':")  
+for relationship in web_graph.query("ArtificialIntelligence"): 
+  print(relationship) 

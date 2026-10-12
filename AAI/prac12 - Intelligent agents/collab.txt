@@ -1,0 +1,16 @@
+class IntelligentAgent: 
+  def __init__ (self): 
+    self.location_states = {"RoomA": "Dirty", "RoomB": "Clean"} 
+ 
+  def act(self, current_location): 
+    status = self.location_states.get(current_location)  
+    print(f"Agent perceived {current_location} is {status}")  
+    if status == "Dirty": 
+      self.location_states[current_location] = "Clean"  
+      return "Suck Dirt" 
+    else: 
+      return "Move to next room" 
+ 
+agent = IntelligentAgent()  
+print("Action 1:", agent.act("RoomA")) 
+print("Action 2:", agent.act("RoomA")) 

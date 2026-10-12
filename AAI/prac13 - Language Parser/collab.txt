@@ -1,0 +1,18 @@
+class SimpleParser: 
+  def __init__ (self):  
+    self.grammar = { 
+      "Noun": ["AI", "Robot", "Python"], 
+      "Verb": ["learns", "computes", "creates"] 
+      } 
+ 
+  def parse_sentence(self, sentence):  
+    tokens = sentence.split() 
+    if len(tokens) == 2: 
+      subject, action = tokens[0], tokens[1] 
+      if subject in self.grammar["Noun"] and action in self.grammar["Grammar_Verb" if "G rammar_Verb" in self.grammar else "Verb"]: 
+        return f"Valid Sentence Structure: [Subject: {subject}] -> [Predicate: {action}]" 
+    return "Syntax Error: Out of lexicon grammar bounds." 
+ 
+parser = SimpleParser()  
+print(parser.parse_sentence("AI learns"))  
+print(parser.parse_sentence("Python computes")) 

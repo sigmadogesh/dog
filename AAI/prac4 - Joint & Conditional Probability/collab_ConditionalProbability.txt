@@ -1,0 +1,18 @@
+#Conditional Probability
+def get_valid_probability_input(prompt): 
+  while True: 
+    try: 
+      probability = float(input(prompt)) 
+      if 0 <= probability <= 1: 
+        return probability 
+      else: 
+        print("Invalid input. Please enter a probability between 0 and 1.") 
+    except ValueError: 
+      print("Invalid input. Please enter a valid probability.") 
+ 
+P_A = get_valid_probability_input("Enter the probability of event A (0 to 1): ") 
+P_B = get_valid_probability_input("Enter the probability of event B (0 to 1): ") 
+ 
+P_A_and_B = P_A * P_B 
+formatted_result = "{:.2f}".format(P_A_and_B) 
+print(f"\nP(A and B) = {formatted_result}") 

@@ -1,0 +1,16 @@
+def bayes_theorem(a,b,c): 
+  d = (b*a)/c
+  return d 
+if __name__ == "__main__": 
+  a= float(input("enter prior probability:")) 
+  b= float(input("enter likelihood:")) 
+  c= float(input("enter evidence:")) 
+  d=bayes_theorem(a,b,c) 
+  print("posterior probability:",d) 
+ 
+x=0.10 
+y= 0.80 
+c= 0.05 
+a= (x*y)+(c*(1-x)) 
+b= (y*x)/a 
+print(f"probabilty that the email is spam given it contains 'free':{round(b*100,2)}%") 

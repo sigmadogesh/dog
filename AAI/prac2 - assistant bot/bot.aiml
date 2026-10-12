@@ -1,0 +1,16 @@
+<aiml version ="1.0.1" encoding="UTF-8">
+
+  <category>
+    <pattern>CALL MY *</pattern>
+    <template>sorry unable to call right now</template>
+  </category>
+  <category>
+    <pattern> CALL MY _</pattern>
+    <template>calling your <star/> right now. please hold....</template>
+  </category>
+  <category>
+    <pattern>I AM _</pattern>
+    <template>nice to meet you, <star/> !! how can i help you?</template>
+  </category>
+
+</aiml>

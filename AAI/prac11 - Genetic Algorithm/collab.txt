@@ -1,0 +1,18 @@
+import random 
+target_length = 8 
+population_size = 4 
+mutation_rate = 0.1 
+def fitness(chromosome): return sum(chromosome) # Generate Initial Population 
+population = [[random.randint(0,1) for _ in range(target_length)] for _ in 
+range(population_size)] 
+population = sorted(population, key=fitness, reverse=True)  
+parent1, parent2 = population[0], population[1] 
+ 
+crossover_point = target_length // 2 
+child = parent1[:crossover_point] + parent2[crossover_point:] 
+ 
+if random.random() < mutation_rate: 
+  idx = random.randint(0, target_length - 1)  
+  child[idx] = 1 - child[idx] 
+print("Top Parent:", parent1, "Fitness:", fitness(parent1))  
+print("Generated Offspring:", child, "Fitness:", fitness(child))

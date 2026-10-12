@@ -1,0 +1,27 @@
+import numpy as np 
+ 
+X = np.array([[0,0], [0,1], [1,0], [1,1]]) 
+y = np.array([[0], [1], [1], [0]]) 
+ 
+np.random.seed(42) 
+wh = np.random.rand(2, 2) # Hidden weights 
+wout = np.random.rand(2, 1) # Output weights 
+ 
+def sigmoid(x): return 1 / (1 + np.exp(-x)) 
+def sigmoid_derivative(x): return x * (1 - x) 
+ 
+for epoch in range(1000): # Feedforward 
+  hidden_layer = sigmoid(np.dot(X, wh)) 
+  output_layer = sigmoid(np.dot(hidden_layer, wout)) 
+ 
+  # Backpropagation 
+  error = y - output_layer 
+  d_output = error * sigmoid_derivative(output_layer) 
+ 
+  error_hidden = d_output.dot(wout.T) 
+  d_hidden = error_hidden * sigmoid_derivative(hidden_layer) 
+ 
+  wout += hidden_layer.T.dot(d_output) * 0.1 
+  wh += X.T.dot(d_hidden) * 0.1 
+ 
+print("Outputs after training loop:\n", output_layer)

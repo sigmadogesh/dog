@@ -1,0 +1,14 @@
+def triangle_membership(x, a, b, c): 
+  if x <= a or x >= c: return 0.0 
+  elif a < x <= b: return (x - a) / (b - a)  
+  elif b < x < c: return (c - x) / (c - b)  
+  return 0.0 
+ 
+# Application: AC Fan Speed based on Temperature  
+temperature = 28 # Celsius 
+low_speed = triangle_membership(temperature, 15, 20, 25) 
+med_speed = triangle_membership(temperature, 20, 25, 30) 
+high_speed = triangle_membership(temperature, 25, 35, 45) 
+ 
+print(f"Fuzzy Memberships for Temp={temperature}°C:") 
+print(f"Low Speed: {low_speed}, Medium Speed: {med_speed}, High Speed: {high_speed}") 

@@ -1,0 +1,14 @@
+from sklearn import svm 
+import numpy as np 
+ 
+# Data points: [Feature1, Feature2] 
+X = np.array([[1, 2], [5, 8], [1.5, 1.8], [8, 8], [1, 0.6], [9, 11]]) 
+y = [0, 1, 0, 1, 0, 1] # Classes 
+ 
+# Instantiate and fit SVM model  
+clf = svm.SVC(kernel='linear')  
+clf.fit(X, y) 
+ 
+test_point = [[2, 3]] 
+print(f"Predicted class for test point {test_point}:", 
+clf.predict(test_point)[0]) 

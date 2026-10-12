@@ -1,0 +1,58 @@
+<aiml version="1.0.1" encoding="UTF-8"> 
+
+  <category> 
+    <pattern>HELLO</pattern> 
+    <template>Hello! Welcome to the Flu Diagnosis Center. How can I help you today?</template> 
+  </category> 
+
+  <category> 
+    <pattern>HI</pattern> 
+    <template>Hi there! Welcome to the Flu Diagnosis Center. Are you looking to book a test or check symptoms?</template> 
+  </category> 
+
+  <category> 
+    <pattern>I HAVE A *</pattern> 
+    <template>I'm sorry to hear you have a <star/>. Common flu symptoms include fever, chills, muscle aches, cough, and congestion. Would you like to schedule a flu test?</template> 
+  </category> 
+
+  <category> 
+    <pattern>I HAVE *</pattern> 
+    <template>Experiencing <star/> can be quite uncomfortable. We recommend getting a rapid flu test to be sure. Shall I help you book an appointment?</template> 
+  </category> 
+
+  <category> 
+    <pattern>WHAT TESTS</pattern> 
+    <template>We offer Rapid Influenza Diagnostic Tests (RIDTs) and RT-PCR tests for the flu. Results for rapid tests take about 15-30 minutes.</template> 
+  </category> 
+
+  <category> 
+    <pattern>BOOK AN APPOINTMENT</pattern> 
+    <template>Sure, I can help you book an appointment. What day and time would you like to visit the center?</template> 
+  </category> 
+
+  <category> 
+    <pattern>I WANT TO BOOK *</pattern> 
+    <template>Okay, booking <star/>. Please provide your full name and contact number so our triage nurse can confirm your slot.</template> 
+  </category> 
+
+  <category> 
+    <pattern>WHERE ARE YOU LOCATED</pattern> 
+    <template>We are located at the Main Medical Plaza, Suite 400. We are open Monday through Sunday, 8:00 AM to 8:00 PM.</template> 
+  </category> 
+
+  <category> 
+    <pattern>HOW MUCH IS *</pattern> 
+    <template>The cost for <star/> depends on your insurance. Out of pocket, a rapid test is $50 and a PCR test is $120.</template> 
+  </category> 
+
+  <category> 
+    <pattern>SEVERE *</pattern> 
+    <template>If you are experiencing severe <star/>, shortness of breath, or chest pain, please call emergency services or go to the nearest emergency room immediately.</template> 
+  </category> 
+
+  <category> 
+    <pattern>THANK YOU</pattern> 
+    <template>You're welcome! Get plenty of rest and stay hydrated. Feel better soon!</template> 
+  </category> 
+
+</aiml>

@@ -1,0 +1,21 @@
+!pip install python-aiml
+
+import aiml 
+ 
+def main(): 
+  kernal = aiml.Kernel() 
+  kernal.learn('/content/bot.aiml') 
+ 
+  print('Hey There !!!') 
+ 
+  while True: 
+    user_input = input('You: ').strip().upper() 
+    if user_input.lower() in ["quit", "exit", "bye"]: 
+            print("Bot: Goodbye!") 
+            break 
+ 
+    response = kernal.respond(user_input) 
+    print('Expert System:', response) 
+ 
+if __name__ == "__main__": 
+  main() 

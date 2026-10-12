@@ -1,0 +1,23 @@
+#Joint Probability
+def get_valid_probability_input(prompt): 
+  while True: 
+    try: 
+      probability = float(input(prompt)) 
+      if 0 <= probability <= 1: 
+        return probability 
+      else: 
+        print("Invalid input. Please enter a probability between 0 and 1.") 
+    except ValueError: 
+      print("Invalid input. Please enter a valid probability.") 
+ 
+P_B = get_valid_probability_input("Enter the probability of event B: ") 
+P_A_and_B = get_valid_probability_input("Enter the probability of event A and B: ") 
+ 
+if P_A_and_B > P_B: 
+  print("\nError: P(A and B) cannot be greater than P(B).") 
+elif P_B == 0: 
+  print("\nError P(B) cannot be 0 when calculating conditional probability.") 
+else: 
+  P_A_given_B = P_A_and_B / P_B 
+  formatted_result = "{:.2f}".format(P_A_given_B) 
+  print(f"\nP(A|B) = {formatted_result}")

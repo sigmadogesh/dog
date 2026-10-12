@@ -1,0 +1,31 @@
+class RuleBasedSystem: 
+ 
+    def __init__(self): 
+        # Initial knowledge base facts 
+        self.facts = {"has_savings", "stable_income"} 
+ 
+        # Production rules 
+        self.rules = [ 
+            {"if": ["has_savings", "stable_income"], "then": "eligible_for_loan"}, 
+            {"if": ["eligible_for_loan"], "then": "pre_approved_mortgage"}, 
+        ] 
+ 
+    def run(self): 
+        iterations = True 
+ 
+        while iterations: 
+            iterations = False 
+            for rule in self.rules: 
+                if ( 
+                    all(item in self.facts for item in rule["if"]) 
+                    and rule["then"] not in self.facts 
+                ): 
+                    self.facts.add(rule["then"]) 
+                    print(f"Derived new fact: {rule['then']}") 
+                    iterations = True 
+ 
+        print("Final Knowledge Base Facts:", self.facts) 
+ 
+# Initialize and run the system 
+rbs = RuleBasedSystem() 
+rbs.run()

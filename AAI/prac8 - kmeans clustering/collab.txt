@@ -1,0 +1,13 @@
+import numpy as np 
+from sklearn.cluster import KMeans 
+ 
+# Dataset coordinates 
+X = np.array([[2, 3], [3, 2], [2, 2], [8, 9], [9, 8], [8, 8]]) 
+ 
+# Apply K-Means 
+km = KMeans(n_clusters=2, init='random', n_init=10, max_iter=300, 
+random_state=42)  
+km.fit(X) 
+ 
+print("Cluster Centers:\n", km.cluster_centers_)  
+print("Assigned Labels for Data Points:", km.labels_) 

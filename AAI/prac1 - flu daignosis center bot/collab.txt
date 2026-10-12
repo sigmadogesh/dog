@@ -1,0 +1,24 @@
+!pip install python-aiml
+
+import aiml
+
+def main():
+    #Create an AIML kernel
+    kernel = aiml.Kernel()
+
+    #Load the AIML knowldege
+    kernel.learn("/content/flu.aiml")
+
+    print("Welcome to the flu diagnosis center")
+
+    while True:
+      user_input = input("You: ").strip().upper()
+      if user_input == "EXIT":
+        print("Goodbye!")
+        break
+
+      response = kernel.respond(user_input)
+      print("Expert System: " + response)
+
+if __name__ == "__main__":
+    main()
