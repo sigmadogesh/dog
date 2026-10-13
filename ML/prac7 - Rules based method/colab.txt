@@ -1,0 +1,36 @@
+from sklearn.datasets import load_iris
+iris = load_iris()
+x = iris.data
+y = iris.target
+print("Features:", iris.feature_names)
+print("Classes:", iris.target_names)
+
+def classify_iris(sample):
+  petal_length = sample[2]
+  if petal_length <= 2.0:
+    return 0
+  elif petal_length <= 5.0:
+    return 1
+  else:
+    return 2
+
+y_pred = []
+for sample in x:
+  prediction = classify_iris(sample)
+  y_pred.append(prediction)
+print("Predicted Classes:")
+print(y_pred)
+
+from sklearn.metrics import accuracy_score
+accuracy = accuracy_score(y, y_pred)
+print("Test SCore:", accuracy * 100, "%")
+
+from sklearn.metrics import confusion_matrix
+cm = confusion_matrix(y, y_pred)
+print("Confusion Matrix:")
+print(cm)
+
+new_sample = [[6.5, 3.0, 5.5, 2.0]]
+prediction = classify_iris(new_sample[0])
+print("New Sample:", new_sample)
+print("Predicted Class:", iris.target_names[prediction])

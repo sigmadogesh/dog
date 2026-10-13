@@ -1,0 +1,29 @@
+import pandas as pd
+import numpy as np
+
+data = {
+    "Sky": ["Sunny", "Sunny", "Rainy", "Sunny"],
+    "AirTemp": ["Warm", "Warm", "Cold", "Warm"],
+    "Humidity": ["Normal", "High", "High", "High"],
+    "Wind": ["Strong", "Strong", "Strong", "Strong"],
+    "Water": ["Warm", "Warm", "Warm", "Cool"],
+    "Forecast": ["Same", "Same", "Change", "Change"],
+    "EnjoySport": ["Yes", "Yes", "No", "Yes"]
+}
+
+df = pd.DataFrame(data)
+df.to_csv("training.csv", index=False)
+print("CSV file created successfully")
+
+data = pd.read_csv("trainingdata.csv")
+print("Training Data: \n")
+print(data)
+
+concepts = np.array(data.iloc[:,:-1])
+target = np.array(data.iloc[:,-1])
+
+S = concepts[0].copy()
+G = [["?" for i in range(len(S))]]
+
+print("\n Initial Specific Hypothesis(S):")
+print(S)

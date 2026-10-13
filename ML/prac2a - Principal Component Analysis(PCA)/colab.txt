@@ -1,0 +1,38 @@
+import pandas as pd
+import numpy as np
+
+from sklearn.datasets import load_iris
+from sklearn.decomposition import PCA
+from sklearn.feature_selection import SelectKBest, f_classif
+from sklearn.preprocessing import StandardScaler
+
+iris = load_iris()
+x = iris.data
+y = iris.target
+df = pd.DataFrame(x, columns=iris.feature_names)
+df["Target"] = y
+print(df.head())
+
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(x)
+print(X_scaled[:5])
+
+pca = PCA(n_components=2)
+X_pca = pca.fit_transform(X_scaled)
+print("Transformed Data:\n")
+print(X_pca[:5])
+
+print("Explained Variance Ratio:")
+print(pca.explained_variance_ratio_)
+
+selector = SelectKBest(score_func=f_classif, k='all')
+selector.fit(x, y)
+
+scores = selector.scores_
+feature_scores = pd.DataFrame({'Feature': iris.feature_names, 'Score': scores})
+print("\nFeature Scores:")
+print(feature_scores)
+
+ranking = feature_scores.sort_values(by='Score', ascending=False)
+print("Ranking of Features:")
+print(ranking)

@@ -1,0 +1,34 @@
+import pandas as pd
+
+data = {
+    "Hours": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    "Pass": [0, 0, 0, 0, 1, 1, 1, 1, 1, 1]
+}
+
+df = pd.DataFrame(data)
+df.to_csv("logistic_data.csv", index=False)
+print("CSV file created successfully")
+
+df = pd.read_csv("logistic_data.csv")
+print(df)
+
+x = df[["Hours"]]
+y = df["Pass"]
+
+from sklearn.model_selection import train_test_split
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3, random_state=42)
+
+from sklearn.linear_model import LogisticRegression
+model = LogisticRegression()
+model.fit(x_train, y_train)
+
+y_pred = model.predict(x_test)
+print("Predicted: ",y_pred)
+print("Actual: ",y_test.values)
+
+from sklearn.metrics import accuracy_score
+print("Accuracy: ",accuracy_score(y_test, y_pred))
+
+new_data = [[5.8]]
+prediction = model.predict(new_data)
+print("Prediction: ",prediction)

@@ -1,0 +1,54 @@
+from sklearn.datasets import load_iris
+import pandas as pd
+iris = load_iris()
+x = iris.data
+y = iris.target
+print("Features:", iris.feature_names)
+print("Target Names:", iris.target_names)
+
+from sklearn.model_selection import train_test_split
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3, random_state=42)
+print("Training data:", x_train.shape)
+print("Testing data:", x_test.shape)
+
+from sklearn.cluster import KMeans
+KMeans = KMeans(n_clusters=3)
+KMeans.fit(x_train)
+print("Cluster Centers:")
+print(KMeans.cluster_centers_)
+
+cluster_pred = KMeans.predict(x_test)
+print("Predicted Clusters:")
+print(cluster_pred)
+
+from scipy.stats import mode
+import numpy as np
+train_clusters = KMeans.predict(x_train)
+cluster_to_class = {}
+for cluster in range(3):
+  labels = y_train[train_clusters == cluster]
+  if len(labels) > 0:
+    cluster_to_class[cluster] = mode(labels, keepdims=False).mode
+print("Cluster to Class Mapping:")
+print(cluster_to_class)
+
+y_pred = np.array([
+    cluster_to_class[cluster]
+    for cluster in cluster_pred
+])
+
+print("Actual Values:")
+print(y_test)
+print("\nPredicted Values:")
+print(y_pred)
+
+from sklearn.metrics import accuracy_score
+test_score = accuracy_score(y_test, y_pred)
+print("Test Score =", test_score * 100, "%")
+
+new_sample = [[5.9, 3.0, 4.2, 1.5]]
+new_cluster = KMeans.predict(new_sample)[0]
+new_prediction = cluster_to_class[new_cluster]
+print("New Sample:", new_sample)
+print("Predicted Cluster:", new_sample)
+print("Predicted Class:", iris.target_names[new_prediction])
